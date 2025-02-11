@@ -72,15 +72,16 @@ class _HomePageState extends State<HomePage> {
               title: Text(planet.name),
               subtitle: Text(planet.nickname ?? "Sem apelido"),
               trailing: const Icon(Icons.arrow_forward, color: Colors.deepPurple),
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PlanetDetailsPage(
-                    planet: planet,
-                    onUpdate: _loadPlanets, onSave: () {  },
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PlanetDetailsPage(
+                      planet: planet,
+                      onSave: () {}, // Pode ser uma função vazia se não precisar atualizar na tela de detalhes
+                      onUpdate: _loadPlanets, // ✅ Atualiza a lista na HomePage
+                    ),
                   ),
                 ),
-              ),
             ),
           );
         },

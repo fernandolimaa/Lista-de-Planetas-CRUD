@@ -5,8 +5,13 @@ import '../database/database_helper.dart';
 class PlanetDetailsPage extends StatefulWidget {
   final Planet planet;
   final VoidCallback onSave;
+  final VoidCallback onUpdate; // ✅ Adicionado para atualizar a lista na HomePage
 
-  PlanetDetailsPage({required this.planet, required this.onSave, required Future<void> Function() onUpdate});
+  PlanetDetailsPage({
+    required this.planet,
+    required this.onSave,
+    required this.onUpdate, // ✅ Agora a função será usada corretamente
+  });
 
   @override
   _PlanetDetailsPageState createState() => _PlanetDetailsPageState();
@@ -39,14 +44,19 @@ class _PlanetDetailsPageState extends State<PlanetDetailsPage> {
       );
       await DatabaseHelper.instance.updatePlanet(updatedPlanet);
       widget.onSave();
+      widget.onUpdate(); // ✅ Atualiza a lista na HomePage
       Navigator.pop(context);
     }
   }
 
   Future<void> _deletePlanet() async {
-    await DatabaseHelper.instance.deletePlanet(widget.planet.id!);
-    widget.onSave();
-    Navigator.pop(context);
+    if (widget.planet.id != null) {
+      await DatabaseHelper.instance.deletePlanet(widget.planet.id!);
+      widget.onUpdate(); // ✅ Atualiza a HomePage após excluir
+      Navigator.pop(context); // ✅ Fecha a tela de detalhes
+    } else {
+      print("🚨 Erro: ID do planeta é nulo!");
+    }
   }
 
   @override
