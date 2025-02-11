@@ -1,0 +1,1 @@
+ C:\\Users\\Filipe\ Freitas\\Documents\\Talento\ Tech\\Fernando\\12\\app-planetars\\lista_planetas\\.dart_tool\\flutter_build\\6f4a96b9fc17a336b59a9165b696d749\\native_assets.yaml: 
